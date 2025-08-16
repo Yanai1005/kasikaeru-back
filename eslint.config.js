@@ -14,6 +14,25 @@ export default [
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
+      globals: {
+        console: 'readonly',
+        Request: 'readonly',
+        Response: 'readonly',
+        Headers: 'readonly',
+        URL: 'readonly',
+        URLSearchParams: 'readonly',
+        D1Database: 'readonly',
+        Fetcher: 'readonly',
+        // Vitest globals
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': tseslint,
@@ -30,6 +49,8 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      'no-undef': 'off', // TypeScriptが型チェックするので無効化
     },
   },
   {
@@ -46,6 +67,7 @@ export default [
       '.wrangler/',
       '*.config.js',
       '*.config.ts',
+      'worker-configuration.d.ts',
     ],
   },
 ];
