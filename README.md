@@ -1,4 +1,5 @@
 # kasikaeru-back
+
 ## 開発環境
 
 ```txt
@@ -35,5 +36,5 @@ Pass the `CloudflareBindings` as generics when instantiation `Hono`:
 
 ```ts
 // src/index.ts
-const app = new Hono<{ Bindings: CloudflareBindings }>()
+const app = new Hono<{ Bindings: CloudflareBindings }>();
 ```
