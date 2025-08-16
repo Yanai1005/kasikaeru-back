@@ -6,7 +6,7 @@ const lentRecords = new Hono<HonoEnv>();
 // 貸出記録一覧取得
 lentRecords.get('/', async (c) => {
     try {
-        const status = c.req.query('status'); // ?status=active or ?status=returned
+        const status = c.req.query('status');
 
         let query = `
       SELECT 
@@ -91,42 +91,6 @@ lentRecords.put('/:id/return', async (c) => {
     } catch (error) {
         console.error('Error returning item:', error);
         return c.json({ error: 'Failed to return item' }, 500);
-    }
-});
-
-// 特定ユーザーの貸出記録取得
-lentRecords.get('/user/:discord_id', async (c) => {
-    try {
-        const discord_id = c.req.param('discord_id');
-        const status = c.req.query('status');
-
-        let query = `
-      SELECT 
-        lr.*,
-        u.name as user_name,
-        o.object_name,
-        o.code_value,
-        c.category_name
-      FROM lent_records lr
-      JOIN users u ON lr.discord_id = u.discord_id
-      JOIN objects o ON lr.object_id = o.object_id
-      JOIN categories c ON o.category_id = c.category_id
-      WHERE lr.discord_id = ?
-    `;
-
-        if (status === 'active') {
-            query += ' AND lr.lent_state = true';
-        } else if (status === 'returned') {
-            query += ' AND lr.lent_state = false';
-        }
-
-        query += ' ORDER BY lr.lent_date DESC';
-
-        const { results } = await c.env.DB.prepare(query).bind(discord_id).all();
-        return c.json(results);
-    } catch (error) {
-        console.error('Error fetching user lent records:', error);
-        return c.json({ error: 'Failed to fetch user lent records' }, 500);
     }
 });
 

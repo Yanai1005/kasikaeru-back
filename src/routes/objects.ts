@@ -76,27 +76,4 @@ objects.get('/by-code/:code', async (c) => {
     }
 });
 
-// 特定備品取得
-objects.get('/:id', async (c) => {
-    try {
-        const id = c.req.param('id');
-
-        const { results } = await c.env.DB.prepare(`
-      SELECT o.*, c.category_name 
-      FROM objects o 
-      JOIN categories c ON o.category_id = c.category_id
-      WHERE o.object_id = ?
-    `).bind(id).all();
-
-        if (results.length === 0) {
-            return c.json({ error: 'Object not found' }, 404);
-        }
-
-        return c.json(results[0]);
-    } catch (error) {
-        console.error('Error fetching object:', error);
-        return c.json({ error: 'Failed to fetch object' }, 500);
-    }
-});
-
 export default objects;
