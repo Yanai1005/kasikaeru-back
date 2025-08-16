@@ -1,21 +1,19 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
-<body>
-	<h1 id="heading"></h1>
-	<script>
-		fetch('/message')
-			.then((resp) => resp.text())
-			.then((text) => {
-				const h1 = document.getElementById('heading');
-				h1.textContent = text;
-			});
-	</script>
-</body>
-
+  <body>
+    <h1 id="heading"></h1>
+    <script>
+      fetch('/message')
+        .then(resp => resp.text())
+        .then(text => {
+          const h1 = document.getElementById('heading');
+          h1.textContent = text;
+        });
+    </script>
+  </body>
 </html>
