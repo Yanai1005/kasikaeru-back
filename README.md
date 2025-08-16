@@ -1,7 +1,25 @@
+# kasikaeru-back
+## 開発環境
+
 ```txt
 npm install
 npm run dev
 ```
+
+## テスト
+
+```txt
+# テスト実行
+npm test
+
+# カバレッジ付きテスト
+npm run test:coverage
+
+# テスト一回実行
+npm run test:run
+```
+
+## デプロイ
 
 ```txt
 npm run deploy
